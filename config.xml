@@ -1,0 +1,8 @@
+<conf>
+	<database>
+		<drivename>com.mysql.jdbc.Driver</drivename>
+		<url>jdbc:mysql://localhost/rumor</url>
+		<user>fengmin.xu</user>
+		<password>fengmin.xu</password>
+	</database>
+</conf>
