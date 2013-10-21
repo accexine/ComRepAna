@@ -14,14 +14,16 @@ public class PosNegAna<T> {
 	public Map<T,Double> posnegresult = new HashMap<T,Double>();
 	public List<T> allentry = new ArrayList<T>();
 	
-	PosNegAna (List<T> list){
+	public PosNegAna (List<T> list){
 		this.allentry = list;
 	}
 	
 	public void doAnalysis(){
 		for(T t : this.allentry){
-			if( t instanceof Comment||t instanceof Repost){
-				
+			if( t instanceof Comment){
+				Comment m = (Comment)t;
+				String text = m.getText();
+				System.out.println(text);
 			}
 		}
 	}
