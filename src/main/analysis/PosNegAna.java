@@ -11,20 +11,21 @@ import main.model.Repost;
 
 public class PosNegAna<T> {
 	
-	public Map<T,Double> posnegresult = new HashMap<T,Double>();
-	public List<T> allentry = new ArrayList<T>();
-	
-	public PosNegAna (List<T> list){
-		this.allentry = list;
-	}
-	
-	public void doAnalysis(){
-		for(T t : this.allentry){
-			if( t instanceof Comment){
-				Comment m = (Comment)t;
-				String text = m.getText();
-				System.out.println(text);
-			}
+	/**
+	 * 返回评论或转发的分析结果
+	 * @param list
+	 * @return
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
+	 */
+	public Map<T,Double> doAnalysis(List<T> list) throws NoSuchMethodException, SecurityException{
+		Map<T,Double> result = new HashMap<T,Double>();
+		for(T t : list){
+			System.out.println(t.getClass().getMethod("getText"));
+//			System.out.println
 		}
+		return result;
 	}
+	
+	
 }
