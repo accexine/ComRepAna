@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +26,12 @@ public class GetData {
 		this.con = connection.getConnection();
 	}
 	
+	/**
+	 * 由mid返回评论列表
+	 * @param mid
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<Comment> getComments(String mid) throws SQLException{
 		List<Comment> comments = new ArrayList<Comment>();
 		String sql = "select * from comments where mid="+mid;
@@ -45,7 +50,12 @@ public class GetData {
 		}
 		return comments;
 	}
-	
+	/**
+	 * 由mid返回转发列表 
+	 * @param mid
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<Repost> getReposts(String mid) throws SQLException{
 		List<Repost> reposts = new ArrayList<Repost>();
 		String sql = "select * from reposts where mid="+mid;
@@ -72,6 +82,12 @@ public class GetData {
 		return reposts;
 	}
 	
+	/**
+	 * 由mid返回单条微博
+	 * @param mid
+	 * @return
+	 * @throws SQLException
+	 */
 	public Status getStatus(String mid) throws SQLException{
 		String sql = "select * from status where mid="+mid;
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -94,7 +110,41 @@ public class GetData {
 		}
 		return status;
 	}
-	
+	/**
+	 * 返回所有的微博
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Status> getAllStatus() throws SQLException{
+		List<Status> allStatus = new ArrayList<Status>();
+		String sql = "select * from status";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()){
+			Status status = new Status();
+			status.setMid(rs.getString("mid"));
+			status.setUid(rs.getString("uid"));
+			status.setText(rs.getString("text"));
+			status.setSource(rs.getString("source"));
+			status.setRetweeted_status_mid(rs.getString("retweeted_status_mid"));
+			status.setRetweeted_status_uid(rs.getString("retweeted_status_uid"));
+			status.setPic_urls(rs.getString("pic_urls"));
+			status.setReposts_count(rs.getInt("reposts_count"));
+			status.setComments_count(rs.getInt("comments_count"));
+			status.setCreated_at(rs.getTimestamp("created_at"));
+			status.setFavorited(rs.getString("favorited"));
+			status.setTruncated(rs.getString("truncated"));
+			status.setAttitudes_count(rs.getInt("attitudes_count"));
+			allStatus.add(status);
+		}
+		return allStatus;
+	}
+	/**
+	 * 由uid返回单个用户
+	 * @param uid
+	 * @return
+	 * @throws SQLException
+	 */
 	public User getUser(String uid) throws SQLException{
 		User user = new User();
 		String sql = "select * from user where uid="+uid;
@@ -126,4 +176,5 @@ public class GetData {
 		
 		return user;
 	}
+
 }

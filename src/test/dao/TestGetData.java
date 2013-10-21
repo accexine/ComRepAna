@@ -40,5 +40,12 @@ public class TestGetData {
 		System.out.println(status.getCreated_at());
 		assertNotNull(status);
 	}
-
+	@Test
+	public void testgetAllStatus() throws ClassNotFoundException, SQLException, DocumentException{
+		GetData getdata = new GetData();
+		List<Status> allStatus = getdata.getAllStatus();
+		for(Status s : allStatus){
+			System.out.println(s.getMid());
+		}
+	}
 }
