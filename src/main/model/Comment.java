@@ -1,6 +1,6 @@
 package main.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Comment {
 	private String id;
@@ -9,7 +9,7 @@ public class Comment {
 	private String reply_comment;
 	private String source;
 	private String text;
-	private Date created_at;
+	private Timestamp created_at;
 	public String getId() {
 		return id;
 	}
@@ -46,10 +46,10 @@ public class Comment {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public Date getCreated_at() {
+	public Timestamp getCreated_at() {
 		return created_at;
 	}
-	public void setCreated_at(Date created_at) {
+	public void setCreated_at(Timestamp created_at) {
 		this.created_at = created_at;
 	}
 }

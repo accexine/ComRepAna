@@ -1,6 +1,6 @@
 package main.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class User {
 	private String uid;
@@ -15,11 +15,11 @@ public class User {
 	private int followers_count;
 	private int friends_count;
 	private int statuses_count;
-	private Date created_at;
+	private Timestamp created_at;
 	private int verified;
 	private String verified_reason;
 	private int favourites_count;
-	private String allow_all_act_mas;
+	private String allow_all_act_msg;
 	private String allow_all_comment;
 	private int bi_followers_count;
 	private String lang;
@@ -96,10 +96,10 @@ public class User {
 	public void setStatuses_count(int statuses_count) {
 		this.statuses_count = statuses_count;
 	}
-	public Date getCreated_at() {
+	public Timestamp getCreated_at() {
 		return created_at;
 	}
-	public void setCreated_at(Date created_at) {
+	public void setCreated_at(Timestamp created_at) {
 		this.created_at = created_at;
 	}
 	public int getVerified() {
@@ -120,11 +120,11 @@ public class User {
 	public void setFavourites_count(int favourites_count) {
 		this.favourites_count = favourites_count;
 	}
-	public String getAllow_all_act_mas() {
-		return allow_all_act_mas;
+	public String getAllow_all_act_msg() {
+		return allow_all_act_msg;
 	}
-	public void setAllow_all_act_mas(String allow_all_act_mas) {
-		this.allow_all_act_mas = allow_all_act_mas;
+	public void setAllow_all_act_mas(String allow_all_act_msg) {
+		this.allow_all_act_msg = allow_all_act_msg;
 	}
 	public String getAllow_all_comment() {
 		return allow_all_comment;

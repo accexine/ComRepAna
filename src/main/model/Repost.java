@@ -1,6 +1,6 @@
 package main.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Repost {
 	private String id;
@@ -13,7 +13,7 @@ public class Repost {
 	private String pic_urls;
 	private int reposts_count;
 	private int comments_count;
-	private Date created_at;
+	private Timestamp created_at;
 	private String favorited;
 	private String truncated;
 	private int attitudes_count;
@@ -77,10 +77,10 @@ public class Repost {
 	public void setComments_count(int comments_count) {
 		this.comments_count = comments_count;
 	}
-	public Date getCreated_at() {
+	public Timestamp getCreated_at() {
 		return created_at;
 	}
-	public void setCreated_at(Date created_at) {
+	public void setCreated_at(Timestamp created_at) {
 		this.created_at = created_at;
 	}
 	public String getFavorited() {
