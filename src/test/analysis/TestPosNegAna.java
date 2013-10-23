@@ -19,8 +19,7 @@ public class TestPosNegAna {
 		List<Status> allStatus = getdata.getAllStatus();
 		for(Status s : allStatus){
 			List<Comment> comments = getdata.getComments(s.getMid());
-			PosNegAna<Comment> posnegana = new PosNegAna<Comment>(comments);
-			posnegana.doAnalysis();
+			
 		}
 	}
 }
