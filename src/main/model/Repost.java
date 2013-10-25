@@ -17,6 +17,7 @@ public class Repost {
 	private String favorited;
 	private String truncated;
 	private int attitudes_count;
+	private double score;
 	public String getId() {
 		return id;
 	}
@@ -100,5 +101,11 @@ public class Repost {
 	}
 	public void setAttitudes_count(int attitudes_count) {
 		this.attitudes_count = attitudes_count;
+	}
+	public double getScore() {
+		return score;
+	}
+	public void setScore(double score) {
+		this.score = score;
 	}
 }

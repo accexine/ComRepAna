@@ -10,6 +10,7 @@ public class Comment {
 	private String source;
 	private String text;
 	private Timestamp created_at;
+	private double score;
 	public String getId() {
 		return id;
 	}
@@ -51,5 +52,11 @@ public class Comment {
 	}
 	public void setCreated_at(Timestamp created_at) {
 		this.created_at = created_at;
+	}
+	public double getScore() {
+		return score;
+	}
+	public void setScore(double score) {
+		this.score = score;
 	}
 }
