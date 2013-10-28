@@ -1,5 +1,7 @@
 package main.analysis;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
@@ -26,14 +28,16 @@ public class PosNegAna<T> {
 	 * @throws InvocationTargetException 
 	 * @throws IllegalArgumentException 
 	 * @throws IllegalAccessException 
+	 * @throws IOException 
 	 */
-	public Map<String,Double> doAnalysis(List<T> list) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	public Map<String,Double> doAnalysis(List<T> list) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException{
 		Map<String,Double> result = new HashMap<String,Double>();
 		for(T t : list){
 			String text = (String) t.getClass().getMethod("getText").invoke(t, null);
-			System.out.println(text);
 			text = parse(filter(text));
-			System.out.println(text);
+			Double score = SupportAna.doAna(text);
+			String id = (String) t.getClass().getMethod("getId").invoke(t, null);
+			result.put(id, score);
 		}
 		return result;
 	}
@@ -46,7 +50,7 @@ public class PosNegAna<T> {
 		if(text.length()==0){
 			return text;
 		}
-		List<SegToken> tokens = segmenter.process(text, SegMode.INDEX);
+		List<SegToken> tokens = segmenter.process(text, SegMode.SEARCH);
 		String result = "";
 		for(SegToken s : tokens){
 			result+=s.token+" ";

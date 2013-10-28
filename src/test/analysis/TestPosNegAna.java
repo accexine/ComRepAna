@@ -1,5 +1,7 @@
 package test.analysis;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,7 +18,7 @@ import org.junit.Test;
 public class TestPosNegAna {
 	
 	@Test
-	public void testPosNegAna() throws ClassNotFoundException, SQLException, DocumentException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	public void testPosNegAna() throws ClassNotFoundException, SQLException, DocumentException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException{
 		GetData getdata = new GetData();
 		List<Status> allStatus = getdata.getAllStatus();
 		for(Status s : allStatus){

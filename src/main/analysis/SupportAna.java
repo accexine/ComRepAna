@@ -26,10 +26,11 @@ public class SupportAna {
 	public static float totalweight;
 	public static int par;	
 	public static float score=0;
-	public static void doAna(String text){
-		System.out.println(text);
+	public static double doAna(String text) throws IOException{
+		if(degreehastab.isEmpty()) dictinit();
+		return SuppAnalysis(text);
 	}
-	public static float SuppAnalysis(String text) throws UnsupportedEncodingException{
+	public static double SuppAnalysis(String text) throws UnsupportedEncodingException{
 		weight=1;
 		poscnt=0;
 		negcnt=0;
@@ -83,7 +84,7 @@ public class SupportAna {
 		else return totalweight;
 	}
 	public static void dictinit() throws IOException{
-		String dict = "E:/element/";
+		String dict = "dict/";
 		String line=null;
 		File file = new File(dict+"degree.txt");
 		BufferedReader reader = new BufferedReader(new FileReader(file));
