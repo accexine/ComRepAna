@@ -31,8 +31,9 @@ public class PosNegAna<T> {
 		Map<String,Double> result = new HashMap<String,Double>();
 		for(T t : list){
 			String text = (String) t.getClass().getMethod("getText").invoke(t, null);
-			String textparseresult = parse(text);
-			System.out.println(textparseresult);
+			System.out.println(text);
+			text = parse(filter(text));
+			System.out.println(text);
 		}
 		return result;
 	}
@@ -42,6 +43,9 @@ public class PosNegAna<T> {
 	 * @param text
 	 */
 	public String parse(String text){
+		if(text.length()==0){
+			return text;
+		}
 		List<SegToken> tokens = segmenter.process(text, SegMode.INDEX);
 		String result = "";
 		for(SegToken s : tokens){
@@ -49,5 +53,17 @@ public class PosNegAna<T> {
 		}
 		result = result.substring(0,result.length()-1);
 		return result;
+	}
+	
+	public String filter(String text){
+		if(text.contains("//")){
+			int end = text.indexOf("//");
+			text = text.substring(0,end);
+		}
+		if(text.contains("回复")){
+			int start = text.indexOf(":")+1;
+			text = text.substring(start,text.length());
+		}
+		return text;
 	}
 }
