@@ -12,30 +12,51 @@ import org.dom4j.io.SAXReader;
 
 
 public class ConnectionMySQL {
-	public String drivename;
-	public String url;
-	public String user;
-	public String password;
+	public static String drivename;
+	public static String url;
+	public static String user;
+	public static String password;
 	
-	public void getConfig(File file) throws DocumentException{
+	public static Connection con;
+	
+	public static void getConfig(File file) throws DocumentException{
 		SAXReader reader = new SAXReader();
 		Document  document = reader.read(file);
 		Element root = document.getRootElement();
 		Element memberElm=root.element("database");
 		
-		this.drivename = memberElm.elementText("drivename").trim();
-		this.url = memberElm.elementText("url").trim();
-		this.user = memberElm.elementText("user").trim();
-		this.password = memberElm.elementText("password").trim();
+		drivename = memberElm.elementText("drivename").trim();
+		url = memberElm.elementText("url").trim();
+		user = memberElm.elementText("user").trim();
+		password = memberElm.elementText("password").trim();
 	}
 	
-	public Connection getConnection() throws ClassNotFoundException, SQLException, DocumentException{
-		if(this.drivename == null){
-			File file = new File("config.xml");
-			getConfig(file);
+	public static Connection getConnection(){
+		if(con != null) {
+			return con;
 		}
-		Class.forName(this.drivename);
-		Connection conn = DriverManager.getConnection(url,user,password);
+		if(drivename == null){
+			File file = new File("config.xml");
+			try {
+				getConfig(file);
+			} catch (DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		try {
+			Class.forName(drivename);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(url,user,password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return conn;
 	}
 	

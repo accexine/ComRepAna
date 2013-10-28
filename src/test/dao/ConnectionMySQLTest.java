@@ -14,19 +14,17 @@ public class ConnectionMySQLTest {
 
 	@Test
 	public void testGetConfig() throws DocumentException {
-		ConnectionMySQL connection = new ConnectionMySQL();
 		File file = new File("config.xml");
-		connection.getConfig(file);
-		assertNotNull(connection.drivename);
-		assertNotNull(connection.url);
-		assertNotNull(connection.user);
-		assertNotNull(connection.password);
+		ConnectionMySQL.getConfig(file);
+		assertNotNull(ConnectionMySQL.drivename);
+		assertNotNull(ConnectionMySQL.url);
+		assertNotNull(ConnectionMySQL.user);
+		assertNotNull(ConnectionMySQL.password);
 	}
 
 	
 	@Test
 	public void testGetConnection() throws ClassNotFoundException, SQLException, DocumentException{
-		ConnectionMySQL connection = new ConnectionMySQL();
-		assertNotNull(connection.getConnection());
+		assertNotNull(ConnectionMySQL.getConnection());
 	}
 }

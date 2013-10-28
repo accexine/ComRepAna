@@ -12,19 +12,8 @@ import main.model.Repost;
 import main.model.Status;
 import main.model.User;
 
-import org.dom4j.DocumentException;
-
 public class GetData {
-	private Connection con;
-	
-	public GetData(Connection con){
-		this.con = con;
-	}
-	
-	public GetData() throws ClassNotFoundException, SQLException, DocumentException{
-		ConnectionMySQL connection = new ConnectionMySQL();
-		this.con = connection.getConnection();
-	}
+	public static Connection con = ConnectionMySQL.getConnection();
 	
 	/**
 	 * 由mid返回评论列表
@@ -32,7 +21,7 @@ public class GetData {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Comment> getComments(String mid) throws SQLException{
+	public static List<Comment> getComments(String mid) throws SQLException{
 		List<Comment> comments = new ArrayList<Comment>();
 		String sql = "select * from comments where mid="+mid;
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -56,7 +45,7 @@ public class GetData {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Repost> getReposts(String mid) throws SQLException{
+	public static List<Repost> getReposts(String mid) throws SQLException{
 		List<Repost> reposts = new ArrayList<Repost>();
 		String sql = "select * from reposts where mid="+mid;
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -88,7 +77,7 @@ public class GetData {
 	 * @return
 	 * @throws SQLException
 	 */
-	public Status getStatus(String mid) throws SQLException{
+	public static Status getStatus(String mid) throws SQLException{
 		String sql = "select * from status where mid="+mid;
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
@@ -115,7 +104,7 @@ public class GetData {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Status> getAllStatus() throws SQLException{
+	public static List<Status> getAllStatus() throws SQLException{
 		List<Status> allStatus = new ArrayList<Status>();
 		String sql = "select * from status";
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -145,7 +134,7 @@ public class GetData {
 	 * @return
 	 * @throws SQLException
 	 */
-	public User getUser(String uid) throws SQLException{
+	public static User getUser(String uid) throws SQLException{
 		User user = new User();
 		String sql = "select * from user where uid="+uid;
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -176,5 +165,5 @@ public class GetData {
 		
 		return user;
 	}
-
+	
 }

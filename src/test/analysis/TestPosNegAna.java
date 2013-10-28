@@ -19,15 +19,14 @@ public class TestPosNegAna {
 	
 	@Test
 	public void testPosNegAna() throws ClassNotFoundException, SQLException, DocumentException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException{
-		GetData getdata = new GetData();
-		List<Status> allStatus = getdata.getAllStatus();
+		List<Status> allStatus = GetData.getAllStatus();
 		for(Status s : allStatus){
-			List<Comment> comments = getdata.getComments(s.getMid());
+			List<Comment> comments = GetData.getComments(s.getMid());
 			PosNegAna<Comment> commentana = new PosNegAna<Comment>();
 			commentana.doAnalysis(comments);
 		}
 		for(Status s : allStatus){
-			List<Repost> reposts = getdata.getReposts(s.getMid());
+			List<Repost> reposts = GetData.getReposts(s.getMid());
 			PosNegAna<Repost> repostana = new PosNegAna<Repost>();
 			repostana.doAnalysis(reposts);
 		}
