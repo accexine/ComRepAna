@@ -35,6 +35,7 @@ public class GetData {
 			comment.setSource(rs.getString("source"));
 			comment.setReply_comment(rs.getString("reply_comment"));
 			comment.setCreated_at(rs.getTimestamp("created_at"));
+			comment.setScore(rs.getDouble("score"));
 			comments.add(comment);
 		}
 		return comments;
@@ -66,6 +67,7 @@ public class GetData {
 			repost.setFavorited(rs.getString("favorited"));
 			repost.setTruncated(rs.getString("truncated"));
 			repost.setAttitudes_count(rs.getInt("attitudes_count"));
+			repost.setScore(rs.getDouble("score"));
 			reposts.add(repost);
 		}
 		return reposts;

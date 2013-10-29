@@ -17,7 +17,11 @@ import main.model.Comment;
 import main.model.Repost;
 import main.model.Status;
 
-public class Main {
+public class UpdateScoreIntoMySQL {
+	/**
+	 * 更新所有评论和转发的支持度得分到数据库
+	 * @param args
+	 */
 	public static void main(String[] args){
 		try {
 			List<Status> statuses = GetData.getAllStatus();
