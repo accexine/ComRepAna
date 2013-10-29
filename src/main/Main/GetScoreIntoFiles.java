@@ -28,7 +28,7 @@ public class GetScoreIntoFiles {
 				File file = new File("some results/comments_score_results.txt");
 				FileWriter fw = new FileWriter(file,true);
 				for(Comment c : comments){
-					String line = c.getId()+","+c.getMid()+","+c.getCreated_at()+","+c.getScore();
+					String line = c.getId()+","+c.getMid()+","+c.getCreated_at()+","+c.getScore()+","+c.getText();
 					fw.write(line+"\r\n");
 				}
 				System.out.println("comments write files success!");
@@ -36,7 +36,7 @@ public class GetScoreIntoFiles {
 				file = new File("some results/reposts_score_results.txt");
 				fw = new FileWriter(file,true);
 				for(Repost r : reposts){
-					String line = r.getId()+","+r.getMid()+","+r.getCreated_at()+","+r.getScore();
+					String line = r.getId()+","+r.getMid()+","+r.getCreated_at()+","+r.getScore()+","+r.getText();
 					fw.write(line+"\r\n");
 				}
 				System.out.println("reposts write files success!");
