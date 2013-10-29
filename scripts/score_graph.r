@@ -1,16 +1,29 @@
-comments = read.table("D:\\comments_score_results.txt", 
-                     sep=",", 
-                     col.names=c("id", "mid", "date", "score"), 
-                     fill=FALSE, 
-                     strip.white=TRUE)
-reposts = read.table("D:\\reposts_score_results.txt",
-                     sep=",", 
-                     col.names=c("id", "mid", "date", "score"), 
-                     fill=FALSE, 
-                     strip.white=TRUE)
+data = read.table("D:\\score_results.txt", 
+           sep="\t", 
+           col.names=c("source", "id", "mid", "date", "score"), 
+           fill=TRUE, 
+           strip.white=TRUE)
+x = 1
+mid=0
+mid_list=c()
+for(i in 1:length(data$source)){
+  if(mid != data[i,3]){
+    mid = data[i,3]
+    mid_list[x] = mid
+    x = x+1
+  }
+}
+for(i in 1:length(mid_list)){
+  mid = mid_list[i]
+  temp = data[data$mid==mid,]
+  temp = temp[ order(temp$date), ]
+  drawgraph(temp,mid)
+}
 
-comments = comments[ order(comments[,3]), ]
-reposts = reposts[ order(reposts[,3]), ]
-par(mfrow=c(1,2)) 
-plot(comments[,4],type='l',xlab="comments",ylab="")
-plot(reposts[,4],type='l',xlab="reposts",ylab="")
+setwd("D:\\graph\\")
+
+drawgraph<-function(datas,name){
+  png(file=paste(name,'.png',sep=""));
+  plot(datas$score,type="l",xlab=mid,ylab="")
+  dev.off()
+}

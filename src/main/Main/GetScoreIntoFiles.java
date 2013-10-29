@@ -1,6 +1,5 @@
 package main.Main;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,18 +24,20 @@ public class GetScoreIntoFiles {
 			for(Status s : statuses){
 				List<Comment> comments = GetData.getComments(s.getMid());
 				List<Repost> reposts = GetData.getReposts(s.getMid());
-				File file = new File("some results/comments_score_results.txt");
+				File file = new File("some results/score_results.txt");
 				FileWriter fw = new FileWriter(file,true);
 				for(Comment c : comments){
-					String line = c.getId()+"\t"+c.getMid()+"\t"+c.getCreated_at()+"\t"+c.getScore()+"\t"+c.getText();
+//					String line = c.getId()+"\t"+c.getMid()+"\t"+c.getCreated_at()+"\t"+c.getScore()+"\t"+c.getText();
+					String line =  "comment"+"\t"+c.getId()+"\t"+c.getMid()+"\t"+c.getCreated_at()+"\t"+c.getScore();
 					fw.write(line+"\r\n");
 				}
-				System.out.println("comments write files success!");
-				fw.close();
-				file = new File("some results/reposts_score_results.txt");
-				fw = new FileWriter(file,true);
+//				System.out.println("comments write files success!");
+//				fw.close();
+//				file = new File("some results/reposts_score_results.txt");
+//				fw = new FileWriter(file,true);
 				for(Repost r : reposts){
-					String line = r.getId()+"\t"+r.getMid()+"\t"+r.getCreated_at()+"\t"+r.getScore()+"\t"+r.getText();
+//					String line = r.getId()+"\t"+r.getMid()+"\t"+r.getCreated_at()+"\t"+r.getScore()+"\t"+r.getText();
+					String line = "repost"+"\t"+r.getId()+"\t"+r.getMid()+"\t"+r.getCreated_at()+"\t"+r.getScore();
 					fw.write(line+"\r\n");
 				}
 				System.out.println("reposts write files success!");
