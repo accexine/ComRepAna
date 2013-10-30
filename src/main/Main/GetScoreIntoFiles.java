@@ -25,6 +25,7 @@ public class GetScoreIntoFiles {
 				List<Comment> comments = GetData.getComments(s.getMid());
 				List<Repost> reposts = GetData.getReposts(s.getMid());
 				File file = new File("some results/score_results.txt");
+//				if(file.exists()) file.delete();
 				FileWriter fw = new FileWriter(file,true);
 				for(Comment c : comments){
 //					String line = c.getId()+"\t"+c.getMid()+"\t"+c.getCreated_at()+"\t"+c.getScore()+"\t"+c.getText();
