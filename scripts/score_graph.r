@@ -1,9 +1,18 @@
-#setwd("D:\\graph\\")
+setwd("D:\\graph\\")
 interval = 60; #时间间隔
 
 drawgraph <- function(matrix,mid){
-  print(paste(mid);
-  print(matrix);
+  png(paste(mid,".png"),width=800,height=800);
+  barplot(matrix[1,],col="blue",ylim=c(-1,1),xaxt="n",xlab = paste("Time Series\n",mid), ylab="Score");
+  barplot(-matrix[2,],col="red",add=TRUE);
+  lines(matrix[3,],col="antiquewhite4",lty=2);
+  legend("topright", 
+         legend = c("pos.count/total.count", "neg.count/total.count", "average"), 
+         fill = c("blue", "red", "antiquewhite4"),
+         bty = "n",
+         cex = 1);
+  dev.off();
+  print(mid);
 }
 
 getmatrix <- function(subset){
@@ -11,7 +20,7 @@ getmatrix <- function(subset){
   subset$date = as.POSIXlt(subset$date);
   begin.date = min(subset$date);
   end.date = begin.date + interval * 60;
-  counts.support = matrix(nrow = 2, ncol = 0);
+  counts.support = matrix(nrow = 3, ncol = 0);
   counts.names = c();
   max.date = max(subset$date);
   
@@ -42,15 +51,19 @@ getmatrix <- function(subset){
     end.date = end.date + interval * 60;
   }
   colnames(counts.support) = counts.names;
+  rownames(counts.support) = c("pos.count/total count","neg.count/total count","average");
   return (counts.support);
 }
 
 computecount <- function(score.list){
-  counts = c(0,0); #c[1] is positive, c[2] is negative
+  counts = c(0,0,0); #c[1] is positive, c[2] is negative, c[3] is average
   for(i in score.list){
     if(i > 0) counts[1] = counts[1] + 1;
-    if(i < 0) counts[2] = counts[2] + 1; 
+    if(i < 0) counts[2] = counts[2] + 1;
   }
+  counts[1] = counts[1]/length(score.list);
+  counts[2] = counts[2]/length(score.list);
+  counts[3] = mean(score.list);
   return (counts);
 }
 
